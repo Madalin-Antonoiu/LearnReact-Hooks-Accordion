@@ -1,5 +1,6 @@
 import React from "react";
 import Accordion from "./Accordion";
+import Search from "./Search";
 
 const items = [
   {
@@ -17,9 +18,15 @@ const items = [
 ];
 
 export default () => {
+  const onSearchSubmit = (props) => {
+    console.log("From App.js!", props);
+  };
+
   return (
     <div className="ui container">
       <Accordion items={items} />
+      <br />
+      <Search label="Search Wikipedia.org" data={onSearchSubmit} />
     </div>
   );
 };
