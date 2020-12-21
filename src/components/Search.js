@@ -2,7 +2,10 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const Search = ({ label, data }) => {
-  const [term, setTerm] = useState("");
+  const [term, setTerm] = useState("programming");
+  const [results, setResults] = useState([]);
+
+  console.log(results);
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -12,7 +15,7 @@ const Search = ({ label, data }) => {
   useEffect(() => {
     const search = async () => {
       //https://en.wikipedia.org/w/api.php//?action=query&list=search&format=json&origin=*&srsearch=programming
-      await axios.get("https://en.wikipedia.org/w/api.php", {
+      const { data } = await axios.get("https://en.wikipedia.org/w/api.php", {
         params: {
           action: "query",
           list: "search",
@@ -21,8 +24,13 @@ const Search = ({ label, data }) => {
           srsearch: term
         }
       });
+      setResults(data);
     };
 
+    // Possible too, if i dont want to provide an initial search term
+    // if (term) {
+    //   search();
+    // }
     search();
   }, [term]);
 
