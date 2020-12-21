@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const Search = ({ label, data }) => {
@@ -8,22 +9,21 @@ const Search = ({ label, data }) => {
     data(term); //pass it as props to the parent
   };
 
-  console.log("I run with every render!");
-
-  // Case 1 - Initial render
-  // useEffect(() => {
-  //   console.log("I only run once!");
-  // }, []);
-
-  // Case 2 - Initial render + after every rerender
-  // useEffect(() => {
-  //   console.log("I run after every render and at initial render!");
-  // });
-
-  // Case 3 - Initial render + IF DATA CHANGED since last render, after every rerender
-  // can have another value in there, will execute if either of the two change
   useEffect(() => {
-    console.log("I only run once!");
+    const search = async () => {
+      //https://en.wikipedia.org/w/api.php//?action=query&list=search&format=json&origin=*&srsearch=programming
+      await axios.get("https://en.wikipedia.org/w/api.php", {
+        params: {
+          action: "query",
+          list: "search",
+          format: "json",
+          origin: "*",
+          srsearch: term
+        }
+      });
+    };
+
+    search();
   }, [term]);
 
   return (
