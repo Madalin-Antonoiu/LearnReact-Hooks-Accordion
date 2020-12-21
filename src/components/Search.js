@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Search = ({ label, data }) => {
   const [term, setTerm] = useState("");
@@ -7,6 +7,24 @@ const Search = ({ label, data }) => {
     event.preventDefault();
     data(term); //pass it as props to the parent
   };
+
+  console.log("I run with every render!");
+
+  // Case 1 - Initial render
+  // useEffect(() => {
+  //   console.log("I only run once!");
+  // }, []);
+
+  // Case 2 - Initial render + after every rerender
+  // useEffect(() => {
+  //   console.log("I run after every render and at initial render!");
+  // });
+
+  // Case 3 - Initial render + IF DATA CHANGED since last render, after every rerender
+  // can have another value in there, will execute if either of the two change
+  useEffect(() => {
+    console.log("I only run once!");
+  }, [term]);
 
   return (
     <div className="search-bar ui segment">
