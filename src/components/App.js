@@ -1,6 +1,7 @@
 import React from "react";
 import Accordion from "./Accordion";
-import Search from "./Search";
+import WikiSearch from "./WikiSearch";
+import Dropdown from "./Dropdown";
 
 const items = [
   {
@@ -20,14 +21,17 @@ const items = [
 export default () => {
   return (
     <div className="ui container">
-      <div className="title">
+      <div className="ui segment">
+        <Dropdown />
+      </div>
+
+      <div className="ui segment">
         Accordion Widget
         <Accordion items={items} />
       </div>
-      <br />
-      <div className="title">
-        Search Wikipedia Widget
-        <Search label="Search Wikipedia.org" />
+      <div className="ui segment">
+        Wikipedia Widget
+        <WikiSearch label="Search Wikipedia.org" />
       </div>
     </div>
   );
