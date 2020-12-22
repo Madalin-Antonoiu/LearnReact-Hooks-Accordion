@@ -20,9 +20,15 @@ const items = [
 export default () => {
   return (
     <div className="ui container">
-      <Accordion items={items} />
+      <div className="title">
+        Accordion Widget
+        <Accordion items={items} />
+      </div>
       <br />
-      <Search label="Search Wikipedia.org" />
+      <div className="title">
+        Search Wikipedia Widget
+        <Search label="Search Wikipedia.org" />
+      </div>
     </div>
   );
 };

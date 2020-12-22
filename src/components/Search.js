@@ -3,7 +3,20 @@ import React, { useState, useEffect } from "react";
 
 const Search = ({ label, data }) => {
   const [term, setTerm] = useState("programming");
+  const [debouncedTerm, setDebouncedTerm] = useState(term);
   const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    if (term) {
+      const timerId = setTimeout(() => {
+        setDebouncedTerm(term);
+      }, 500);
+
+      return () => {
+        clearTimeout(timerId);
+      };
+    }
+  }, [term]);
 
   useEffect(() => {
     const search = async () => {
@@ -14,23 +27,15 @@ const Search = ({ label, data }) => {
           list: "search",
           format: "json",
           origin: "*",
-          srsearch: term
+          srsearch: debouncedTerm
         }
       });
       setResults(data.query.search);
     };
-
-    // Throttling API calls for live-search!
-    const timeoutId = setTimeout(() => {
-      if (term) {
-        search();
-      }
-    }, 500);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [term]);
+    if (debouncedTerm) {
+      search();
+    }
+  }, [debouncedTerm]);
 
   const renderedResults = results.map((result) => {
     return (
@@ -62,7 +67,7 @@ const Search = ({ label, data }) => {
           value={term}
           onChange={(e) => setTerm(e.target.value)}
           type="text"
-          placeholder="Search Wikipedia as you type"
+          placeholder="Type for instant Wikipedia search"
         />
       </div>
 
