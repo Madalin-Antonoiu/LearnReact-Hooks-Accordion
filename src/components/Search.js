@@ -5,8 +5,6 @@ const Search = ({ label, data }) => {
   const [term, setTerm] = useState("programming");
   const [results, setResults] = useState([]);
 
-  console.log(results);
-
   const onFormSubmit = (event) => {
     event.preventDefault();
     data(term); //pass it as props to the parent
@@ -24,7 +22,7 @@ const Search = ({ label, data }) => {
           srsearch: term
         }
       });
-      setResults(data);
+      setResults(data.query.search);
     };
 
     // Possible too, if i dont want to provide an initial search term
@@ -34,9 +32,28 @@ const Search = ({ label, data }) => {
     search();
   }, [term]);
 
+  const renderedResults = results.map((result) => {
+    return (
+      <div key={result.pageid} className="item">
+        <div className="right floated content">
+          <a
+            href={`https://en.wikipedia.org?curid=${result.pageid}`}
+            className="ui button"
+          >
+            Go
+          </a>
+        </div>
+        <div className="content">
+          <div className="header">{result.title}</div>
+          <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
+        </div>
+      </div>
+    );
+  });
+
   return (
     <div className="search-bar ui segment">
-      <form onSubmit={onFormSubmit} className="ui form">
+      <form className="ui form">
         <div className="field">
           <label>{label}</label>
           <br />
@@ -48,6 +65,8 @@ const Search = ({ label, data }) => {
           />
         </div>
       </form>
+
+      <div className="ui celled list">{renderedResults}</div>
     </div>
   );
 };

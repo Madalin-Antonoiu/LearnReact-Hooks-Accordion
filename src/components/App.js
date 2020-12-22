@@ -18,15 +18,11 @@ const items = [
 ];
 
 export default () => {
-  const onSearchSubmit = (props) => {
-    console.log("From App.js!", props);
-  };
-
   return (
     <div className="ui container">
       <Accordion items={items} />
       <br />
-      <Search label="Search Wikipedia.org" data={onSearchSubmit} />
+      <Search label="Search Wikipedia.org" />
     </div>
   );
 };
