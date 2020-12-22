@@ -17,22 +17,36 @@ const items = [
     content: "You use React by creating components."
   }
 ];
+const options = [
+  {
+    label: "The Color is Red",
+    value: "red"
+  },
+  {
+    label: "The Color is Green",
+    value: "green"
+  },
+  {
+    label: "The Color is Blue",
+    value: "blue"
+  }
+];
 
 export default () => {
   return (
     <div className="ui container">
       <div className="ui segment">
-        <Dropdown />
+        <Dropdown options={options} />
       </div>
 
-      <div className="ui segment">
+      {/* <div className="ui segment">
         Accordion Widget
         <Accordion items={items} />
       </div>
       <div className="ui segment">
         Wikipedia Widget
         <WikiSearch label="Search Wikipedia.org" />
-      </div>
+      </div> */}
     </div>
   );
 };
