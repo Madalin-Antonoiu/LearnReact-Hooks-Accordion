@@ -26,10 +26,10 @@ const Search = ({ label, data }) => {
     };
 
     // Possible too, if i dont want to provide an initial search term
-    // if (term) {
-    //   search();
-    // }
-    search();
+    if (term) {
+      search();
+    }
+    //search();
   }, [term]);
 
   const renderedResults = results.map((result) => {
