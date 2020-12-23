@@ -1,9 +1,13 @@
 import React from "react";
 
-export default ({ options }) => {
+export default ({ options, selected, onSelectedChange }) => {
   const list = options.map((option) => {
     return (
-      <div key={option.value} className="item">
+      <div
+        key={option.value}
+        className="item"
+        onClick={() => onSelectedChange(option)}
+      >
         {option.label}
       </div>
     );
@@ -14,7 +18,7 @@ export default ({ options }) => {
         <label className="label">Select a Color</label>
         <div className="ui selection dropdown visible active">
           <i className="dropdown icon"></i>
-          <div className="text">Select Color</div>
+          <div className="text">{selected.label}</div>
           <div className="menu visible transition">{list}</div>
         </div>
       </div>

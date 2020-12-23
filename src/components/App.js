@@ -1,6 +1,6 @@
-import React from "react";
-import Accordion from "./Accordion";
-import WikiSearch from "./WikiSearch";
+import React, { useState } from "react";
+// import Accordion from "./Accordion";
+// import WikiSearch from "./WikiSearch";
 import Dropdown from "./Dropdown";
 
 const items = [
@@ -33,10 +33,16 @@ const options = [
 ];
 
 export default () => {
+  const [selected, setSelected] = useState(options[0]);
+
   return (
     <div className="ui container">
       <div className="ui segment">
-        <Dropdown options={options} />
+        <Dropdown
+          selected={selected}
+          onSelectedChange={setSelected}
+          options={options}
+        />
       </div>
 
       {/* <div className="ui segment">
