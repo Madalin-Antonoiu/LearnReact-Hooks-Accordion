@@ -2,6 +2,10 @@ import React from "react";
 
 export default ({ options, selected, onSelectedChange }) => {
   const list = options.map((option) => {
+    if (option.value === selected.value) {
+      return null; // Don't render anything
+    }
+
     return (
       <div
         key={option.value}
