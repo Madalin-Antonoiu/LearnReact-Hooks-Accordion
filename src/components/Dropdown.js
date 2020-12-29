@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export default ({ options, selected, onSelectedChange }) => {
   const [open, setOpen] = useState(false);
+  const ref = useRef();
+
   const list = options.map((option) => {
     if (option.value === selected.value) {
       return null; // Don't render anything
@@ -18,8 +20,27 @@ export default ({ options, selected, onSelectedChange }) => {
     );
   });
 
+  useEffect(() => {
+    document.body.addEventListener(
+      "click",
+      (event) => {
+        //console.log(event.target);
+        if (ref.current && ref.current.contains(event.target)) {
+          return;
+        }
+
+        //otherwise, the click wasn't inside the component
+        //close the dropdown
+        setOpen(false);
+      },
+      { capture: true }
+    );
+  });
+
+  //console.log(ref.current);
+
   return (
-    <div className="ui form">
+    <div ref={ref} className="ui form">
       <div className="field">
         <label className="label">Select a Color</label>
         <div
