@@ -20,3 +20,6 @@ const Header = () => {
 };
 
 export default Header;
+
+// Version 1 is bad because we completely reload entire html doc
+// Ideal it would be not to do a full page reload, only component reload
