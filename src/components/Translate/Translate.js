@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Dropdown from "../Dropdown";
 import Convert from "./Convert";
+import Input from "../Input";
 
 // Pass options down to Dropdown so user can select one
 const options = [
@@ -10,7 +11,7 @@ const options = [
   },
   {
     label: "Spanish",
-    value: "sp"
+    value: "es"
   },
   {
     label: "Romanian",
@@ -24,12 +25,7 @@ export default () => {
 
   return (
     <div>
-      <div className="ui form">
-        <div className="field">
-          <label>Enter Text</label>
-          <input value={text} onChange={(e) => setText(e.target.value)} />
-        </div>
-      </div>
+      <Input text={text} setText={setText} />
 
       <Dropdown
         options={options}
@@ -37,8 +33,7 @@ export default () => {
         onSelectedChange={setLanguage}
         label="Select a language"
       />
-      <hr />
-      <h3 className="header">Output</h3>
+
       <Convert text={text} language={language} />
     </div>
   );
