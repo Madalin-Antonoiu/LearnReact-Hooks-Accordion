@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-// import Accordion from "./Accordion";
-// import WikiSearch from "./WikiSearch";
+import Accordion from "./Accordion";
+import WikiSearch from "./WikiSearch";
 import Dropdown from "./Dropdown";
 import Translate from "./Translate/Translate";
 
@@ -33,19 +33,34 @@ const options = [
   }
 ];
 
+const showAccordion = () => {
+  if (window.location.pathname === "/") {
+    return <Accordion items={items} />;
+  }
+};
+const showList = () => {
+  if (window.location.pathname === "/list") {
+    return <WikiSearch />;
+  }
+};
+const showDropdown = () => {
+  if (window.location.pathname === "/dropdown") {
+    return <Dropdown options={options} />;
+  }
+};
+const showTranslate = () => {
+  if (window.location.pathname === "/translate") {
+    return <Translate />;
+  }
+};
+
 export default () => {
   return (
     <div>
-      <Translate />
-
-      {/* <div className="ui segment">
-        Accordion Widget
-        <Accordion items={items} />
-      </div>
-      <div className="ui segment">
-        Wikipedia Widget
-        <WikiSearch label="Search Wikipedia.org" />
-      </div> */}
+      {showAccordion()}
+      {showList()}
+      {showDropdown()}
+      {showTranslate()}
     </div>
   );
 };
