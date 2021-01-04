@@ -1,12 +1,16 @@
 // Not used any JSX yet, no need to import React
 //import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // children is received from children component passed to Route, aka <Dropdown /> etc
 const Route = ({ path, children }) => {
+  //We do this state for the sole purpose of rerendering Route
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
   useEffect(() => {
     const onLocationChange = () => {
-      console.log("Location Change");
+      //console.log("Location Change");
+      setCurrentPath(window.location.pathname);
     };
 
     window.addEventListener("popstate", onLocationChange);
@@ -17,7 +21,7 @@ const Route = ({ path, children }) => {
     };
   }, []); // Reminder: [] means run only once on render
 
-  return window.location.pathname === path ? children : null;
+  return currentPath === path ? children : null;
 };
 
 export default Route;

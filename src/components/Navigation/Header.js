@@ -7,8 +7,8 @@ const Header = () => {
       <Link href="/" className="item">
         Accordion
       </Link>
-      <Link href="/list" className="item">
-        List
+      <Link href="/dropdown" className="item">
+        Dropdown
       </Link>
       <Link href="/search" className="item">
         WikiSearch

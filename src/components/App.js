@@ -46,7 +46,7 @@ export default () => {
         <Accordion items={items} />;
       </Route>
 
-      <Route path="/list">
+      <Route path="/search">
         <WikiSearch />;
       </Route>
 
