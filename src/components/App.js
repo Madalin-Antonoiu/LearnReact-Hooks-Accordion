@@ -3,6 +3,7 @@ import Accordion from "./Accordion";
 import WikiSearch from "./WikiSearch";
 import Dropdown from "./Dropdown";
 import Translate from "./Translate/Translate";
+import Route from "./Route";
 
 const items = [
   {
@@ -33,34 +34,30 @@ const options = [
   }
 ];
 
-const showAccordion = () => {
-  if (window.location.pathname === "/") {
-    return <Accordion items={items} />;
-  }
-};
-const showList = () => {
-  if (window.location.pathname === "/list") {
-    return <WikiSearch />;
-  }
-};
-const showDropdown = () => {
-  if (window.location.pathname === "/dropdown") {
-    return <Dropdown options={options} />;
-  }
-};
-const showTranslate = () => {
-  if (window.location.pathname === "/translate") {
-    return <Translate />;
-  }
-};
-
 export default () => {
+  const [selected, setSelected] = useState(options[0]);
   return (
     <div>
-      {showAccordion()}
-      {showList()}
-      {showDropdown()}
-      {showTranslate()}
+      <Route path="/">
+        <Accordion items={items} />;
+      </Route>
+
+      <Route path="/list">
+        <WikiSearch />;
+      </Route>
+
+      <Route path="/dropdown">
+        <Dropdown
+          label="Select a color"
+          options={options}
+          selected={selected}
+          onSelectedChange={setSelected}
+        />
+      </Route>
+
+      <Route path="/translate">
+        <Translate />;
+      </Route>
     </div>
   );
 };
